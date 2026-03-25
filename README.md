@@ -1,49 +1,31 @@
-# Quantitative Financial Risk Analysis: S&P 500
+# 量化金融分析与机器学习趋势预测 (S&P 500)
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
-  <img src="https://img.shields.io/badge/Matplotlib-005C84?style=for-the-badge&logo=matplotlib&logoColor=white" alt="Matplotlib" />
-  <img src="https://img.shields.io/badge/Finance-Data_Analysis-success?style=for-the-badge" alt="Finance" />
+  <img src="https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
+  <img src="https://img.shields.io/badge/Quantitative_Finance-success?style=for-the-badge" alt="Finance" />
 </div>
 
-## 📌 Project Overview
-This project performs an Exploratory Data Analysis (EDA) and quantitative risk assessment on the S&P 500 Index (SPY ETF). It demonstrates the end-to-end process of fetching real-world financial data via APIs, calculating critical risk metrics, and visualizing the results. 
+## 📌 项目简介
+本项目针对标普500指数（SPY）构建了一个端到端的量化金融分析与机器学习预测流水线 (Pipeline)。项目不仅包含基础的探索性数据分析 (EDA) 与风险指标评估，还引入了基于随机森林 (Random Forest) 的二分类模型，用于预测资产的次日涨跌趋势。
 
-This serves as a foundational step for building more complex Machine Learning-based algorithmic trading or risk management systems.
+代码采用生产级规范重构，包含类型提示 (Type Hinting)、模块化设计及标准日志记录 (Logging)，具备良好的可扩展性。
 
-## 📊 Key Features
-* **Automated Data Ingestion:** Utilizes the `yfinance` API to reliably extract adjusted historical market data, handling real-world data structure updates.
-* **Return Volatility Analysis:** Calculates and visualizes the distribution of daily returns, a core component for modeling asset volatility and normal distribution assumptions in ML models.
-* **Risk Assessment (Max Drawdown):** Implements the calculation of Maximum Drawdown to quantify the peak-to-trough decline, a crucial metric for evaluating portfolio risk exposure.
+## ⚙️ 核心工程模块
 
-## 📈 Visualizing Market Behavior
-*(The chart below visualizes the adjusted close price trend and the distribution of daily returns, highlighting market volatility.)*
+### 1. 数据管道与风控分析 (Data Pipeline & EDA)
+* **自动化数据拉取：** 基于 `yfinance` 稳定获取复权历史数据，包含异常处理机制。
+* **风险评估：** 实现了**最大回撤 (Max Drawdown)** 与日收益率波动计算，量化市场下行风险敞口。
 
-<div align="center">
-  <img src="./result_chart.png" alt="S&P 500 Price and Returns Analysis" width="800">
-</div>
+### 2. 机器学习预测流水线 (ML Pipeline)
+* **特征工程 (Feature Engineering)：** 构建了基于时间序列的滚动技术指标（如 MA_5, MA_10）作为模型输入特征。
+* **时间序列防穿越切分：** 严格按照时间先后顺序进行 `train_test_split` (shuffle=False)，杜绝数据泄露。
+* **分类模型构建：** 部署了 `RandomForestClassifier`，通过控制树的深度 (`max_depth`) 缓解过拟合问题。
+* **基准测试 (Baseline)：** 当前基础特征集下的模型方向预测准确率稳定在 **49.50%** 左右，为后续的 Alpha 因子挖掘提供了可靠的对照基准。
 
-## 🚀 Technical Implementation
+## 🚀 快速启动
 
-### Prerequisites
-To run this script locally, ensure you have Python installed along with the required libraries:
-
+### 环境依赖
 ```bash
-pip install yfinance pandas matplotlib
-Core Logic Snippet
-The analysis calculates the maximum drawdown by tracking the cumulative maximum price and identifying the deepest trough:
-# Calculate Max Drawdown
-rolling_max = data['Close'].cummax()
-drawdown = (data['Close'] - rolling_max) / rolling_max
-max_drawdown = drawdown.min()
-🔮 Future Enhancements (Machine Learning Roadmap)
-As a FinTech enthusiast focusing on Machine Learning, future iterations of this repository will explore:
-
-Time-Series Forecasting: Implementing ARIMA or LSTM models to predict short-term price movements based on historical volatility.
-
-Sentiment Analysis Integration: Incorporating NLP techniques to analyze financial news and correlate sentiment scores with daily returns.
-
-Automated Backtesting System: Building a robust framework to test algorithmic trading strategies based on the identified risk metrics.
-
-Disclaimer: This project is for educational purposes only and does not constitute financial advice.
+pip install yfinance pandas scikit-learn matplotlib
