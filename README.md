@@ -26,9 +26,17 @@ The codebase has been refactored to meet production-level engineering standards,
 * **Strict Time-Series Validation:** Data is split chronologically (`shuffle=False`) to strictly prevent look-ahead bias (Data Leakage).
 * **Model Performance:** By integrating these Alpha factors, the Random Forest classifier's directional prediction accuracy **improved from the 49.50% baseline to 52.00%**, demonstrating the predictive power of domain-specific feature engineering in noisy financial time series.
 
+## 🧠 Model Interpretability (Explainable AI)
+In quantitative finance, understanding *why* a model makes a decision is as critical as its accuracy. The Random Forest model provides inherent feature importance metrics, allowing us to evaluate the predictive power of our engineered Alpha factors.
+
+<div align="center">
+  <img src="./feature_importance.png" alt="Alpha Factor Feature Importance" width="800">
+</div>
+
+**Key Findings from Factor Analysis:**
+* **Short-Term Momentum Dominates:** The `Daily_Return` (T-0 price action) emerged as the most significant driver for predicting T+1 direction. This aligns with market microstructure theory, where immediate past volatility carries the strongest short-term predictive signal.
+* **Lagging vs. Leading Indicators:** Trend-following indicators like `MACD` and `MA_20` showed relatively lower importance, confirming their lagging nature in highly volatile, daily-frequency predictions.
 ## 🚀 Quick Start
-Gemini 说
-Got it! Let's switch to English.
 
 As I mentioned, 49.50% is a very realistic and honest baseline. In quantitative finance, if a simple moving average model gives you 60%+ accuracy, it almost always means there is a "Data Leakage" bug (the model accidentally peeked at future data). Your result proves your code is rigorous and your testing methodology is sound.
 
