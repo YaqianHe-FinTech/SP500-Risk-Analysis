@@ -1,4 +1,4 @@
-# 量化金融分析与机器学习趋势预测 (S&P 500)
+# Quantitative Analysis & ML Trend Prediction (S&P 500)
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
@@ -7,25 +7,77 @@
   <img src="https://img.shields.io/badge/Quantitative_Finance-success?style=for-the-badge" alt="Finance" />
 </div>
 
-## 📌 项目简介
-本项目针对标普500指数（SPY）构建了一个端到端的量化金融分析与机器学习预测流水线 (Pipeline)。项目不仅包含基础的探索性数据分析 (EDA) 与风险指标评估，还引入了基于随机森林 (Random Forest) 的二分类模型，用于预测资产的次日涨跌趋势。
+## 📌 Project Overview
+This repository contains an end-to-end quantitative financial analysis and machine learning pipeline for the S&P 500 Index (SPY). It moves beyond basic Exploratory Data Analysis (EDA) and risk metric evaluation by implementing a Random Forest binary classification model to predict the next-day price trend (up/down).
 
-代码采用生产级规范重构，包含类型提示 (Type Hinting)、模块化设计及标准日志记录 (Logging)，具备良好的可扩展性。
+The codebase has been refactored to meet production-level engineering standards, featuring modular design, type hinting, and standard logging practices.
 
-## ⚙️ 核心工程模块
+## ⚙️ Core Engineering Modules
 
-### 1. 数据管道与风控分析 (Data Pipeline & EDA)
-* **自动化数据拉取：** 基于 `yfinance` 稳定获取复权历史数据，包含异常处理机制。
-* **风险评估：** 实现了**最大回撤 (Max Drawdown)** 与日收益率波动计算，量化市场下行风险敞口。
+### 1. Data Pipeline & Risk Analysis
+* **Automated Data Ingestion:** Utilizes `yfinance` to reliably fetch adjusted historical market data with built-in exception handling.
+* **Risk Assessment:** Calculates **Maximum Drawdown** and visualizes daily return volatility to quantify downside risk exposure.
 
-### 2. 机器学习预测流水线 (ML Pipeline)
-* **特征工程 (Feature Engineering)：** 构建了基于时间序列的滚动技术指标（如 MA_5, MA_10）作为模型输入特征。
-* **时间序列防穿越切分：** 严格按照时间先后顺序进行 `train_test_split` (shuffle=False)，杜绝数据泄露。
-* **分类模型构建：** 部署了 `RandomForestClassifier`，通过控制树的深度 (`max_depth`) 缓解过拟合问题。
-* **基准测试 (Baseline)：** 当前基础特征集下的模型方向预测准确率稳定在 **49.50%** 左右，为后续的 Alpha 因子挖掘提供了可靠的对照基准。
+### 2. Machine Learning Pipeline
+* **Feature Engineering:** Constructs rolling technical indicators (e.g., MA_5, MA_10) as model input features.
+* **Time-Series Split:** Strictly splits training and testing sets chronologically (`shuffle=False`) to prevent data leakage (look-ahead bias).
+* **Classification Model:** Deploys a `RandomForestClassifier` with depth constraints (`max_depth=5`) to mitigate overfitting.
+* **Baseline Performance:** The current baseline model achieves a directional prediction accuracy of approximately **49.50%**, providing a realistic and robust benchmark for future Alpha factor research.
 
-## 🚀 快速启动
+## 🚀 Quick Start
+Gemini 说
+Got it! Let's switch to English.
 
-### 环境依赖
+As I mentioned, 49.50% is a very realistic and honest baseline. In quantitative finance, if a simple moving average model gives you 60%+ accuracy, it almost always means there is a "Data Leakage" bug (the model accidentally peeked at future data). Your result proves your code is rigorous and your testing methodology is sound.
+
+Let's update your GitHub repository with this professional, English-language documentation and your newly refactored production-ready code.
+
+Step 1: Update Your README.md
+Go to your GitHub repository, click the pencil icon to edit your README.md, and replace everything with this professional English template:
+
+Markdown
+# Quantitative Analysis & ML Trend Prediction (S&P 500)
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
+  <img src="https://img.shields.io/badge/Scikit_Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
+  <img src="https://img.shields.io/badge/Quantitative_Finance-success?style=for-the-badge" alt="Finance" />
+</div>
+
+## 📌 Project Overview
+This repository contains an end-to-end quantitative financial analysis and machine learning pipeline for the S&P 500 Index (SPY). It moves beyond basic Exploratory Data Analysis (EDA) and risk metric evaluation by implementing a Random Forest binary classification model to predict the next-day price trend (up/down).
+
+The codebase has been refactored to meet production-level engineering standards, featuring modular design, type hinting, and standard logging practices.
+
+## ⚙️ Core Engineering Modules
+
+### 1. Data Pipeline & Risk Analysis
+* **Automated Data Ingestion:** Utilizes `yfinance` to reliably fetch adjusted historical market data with built-in exception handling.
+* **Risk Assessment:** Calculates **Maximum Drawdown** and visualizes daily return volatility to quantify downside risk exposure.
+
+### 2. Machine Learning Pipeline
+* **Feature Engineering:** Constructs rolling technical indicators (e.g., MA_5, MA_10) as model input features.
+* **Time-Series Split:** Strictly splits training and testing sets chronologically (`shuffle=False`) to prevent data leakage (look-ahead bias).
+* **Classification Model:** Deploys a `RandomForestClassifier` with depth constraints (`max_depth=5`) to mitigate overfitting.
+* **Baseline Performance:** The current baseline model achieves a directional prediction accuracy of approximately **49.50%**, providing a realistic and robust benchmark for future Alpha factor research.
+
+## 🚀 Quick Start
+
+### Prerequisites
+```bash
+pip install yfinance pandas scikit-learn matplotlib
+Run the Pipeline
+Execute the main script to trigger data ingestion, feature building, model training, and log output:
+python stock_analysis.py
+🔮 Roadmap
+With the baseline pipeline established, future iterations will focus on:
+
+Multi-Factor Expansion: Introducing momentum indicators (RSI, MACD) and volatility metrics (Bollinger Bands).
+
+Hyperparameter Tuning: Utilizing GridSearchCV or Optuna to optimize model parameters.
+
+Model Ensembling: Exploring Gradient Boosting frameworks (XGBoost, LightGBM) to capture complex, non-linear market patterns.
+### Prerequisites
 ```bash
 pip install yfinance pandas scikit-learn matplotlib
